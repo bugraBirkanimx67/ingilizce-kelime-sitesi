@@ -4,8 +4,14 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 // Örnek kelime verileri
-const words = {
-  1: {
+const words: Record<string, {
+  english: string;
+  turkish: string;
+  pronunciation: string;
+  examples: string[];
+  category: string;
+}> = {
+  '1': {
     english: 'Serendipity',
     turkish: 'Hoş bir tesadüf, beklenmedik güzel bir keşif',
     pronunciation: '[ser-uhn-dip-i-tee]',
@@ -15,7 +21,7 @@ const words = {
     ],
     category: 'Günlük Hayat'
   },
-  2: {
+  '2': {
     english: 'Ephemeral',
     turkish: 'Geçici, kısa ömürlü',
     pronunciation: '[ih-fem-er-uhl]',
@@ -30,7 +36,7 @@ const words = {
 export default function WordDetailPage({ params }: { params: { id: string } }) {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const word = words[params.id as keyof typeof words];
+  const word = words[params.id];
 
   const speakWord = () => {
     try {
